@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload MP4 File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .upload-form {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .upload-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .upload-form input[type="file"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .upload-form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .upload-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .upload-form .progress {
+            height: 20px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .upload-form .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #4CAF50;
+        }
+
+        .upload-form .progress-text {
+            line-height: 20px;
+            text-align: center;
+            color: #000;
+        }
+
+        .upload-form .error {
+            color: red;
+        }
+    </style>
+    <script>
+        function updateProgress(e) {
+            if (e.lengthComputable) {
+                var progressPercent = Math.round((e.loaded / e.total) * 100);
+                document.getElementById('progress-bar').style.width = progressPercent + '%';
+                document.getElementById('progress-text').textContent = progressPercent + '%';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload MP4 File</h1>
+    <div class="upload-form">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file">Select an MP4 file:</label>
+            <input type="file" name="file" id="file" accept="video/mp4">
+            <input type="submit" value="Upload">
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar"></div>
+                <div id="progress-text" class="progress-text"></div>
+            </div>
+        </form>
+        <p class="error">{{ error }}</p>
+    </div>
+</body>
+</html>
+
